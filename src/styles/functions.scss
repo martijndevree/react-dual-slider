@@ -1,0 +1,51 @@
+/**
+ * Functions.
+ */
+
+@use 'sass:math';
+@use 'sass:map';
+@use 'sass:list';
+
+/**
+ * Helper function for rem() mixin. Strips any value of its unit.
+ */
+@function strip-units($value) {
+  @return math.div($value, $value * 0 + 1);
+}
+
+/**
+ * Helper function for retrieving the minimum breakpoint width.
+ */
+@function breakpoint-min(
+  $name,
+  $breakpoints: $grid-breakpoints
+) {
+  $min: map.get($breakpoints, $name);
+
+  @return if($min != 0, $min, null);
+}
+
+/**
+ * Helper function for retrieving the maximum breakpoint width.
+ */
+@function breakpoint-max(
+  $name,
+  $breakpoints: $grid-breakpoints
+) {
+  $next: breakpoint-next($name, $breakpoints);
+
+  @return if($next, breakpoint-min($next, $breakpoints) - 1px, null);
+}
+
+/**
+ * Helper function for retrieving the name of the next breakpoint.
+ */
+@function breakpoint-next(
+  $name,
+  $breakpoints: $grid-breakpoints,
+  $breakpoint-names: map.keys($breakpoints)
+) {
+  $n: list.index($breakpoint-names, $name);
+
+  @return if($n < length($breakpoint-names), nth($breakpoint-names, $n + 1), null);
+}

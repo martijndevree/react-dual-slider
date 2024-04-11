@@ -1,0 +1,120 @@
+/**
+ * Mixins.
+ */
+
+@use 'sass:list';
+@use 'sass:math';
+@use "./variables.scss" as *;
+@use "./functions.scss" as *;
+
+/**
+ * Mixin for converting px values to rem values.
+ *
+ * Courtesy of Framework SASS Source Files.
+ *
+ * @param $property
+ *   The property for which to convert pixel sizes.
+ * @param $values
+ *   The pixel sizes of the given property.
+ * @param $root
+ *   Optional parameter for root rem size.
+ */
+@mixin rem($property, $values, $root: 16px) {
+  $px: ();
+  $rem: ();
+
+  @if not unitless($root) {
+    $root: strip-units($root);
+  }
+
+  @if $values {
+    @each $value in $values {
+      @if $value == 0 or type-of($value) != 'number' {
+        $px: list.append($px, $value);
+        $rem: list.append($rem, $value);
+      }
+      @else {
+        $unit: math.unit($value);
+        $val: strip-units($value);
+
+        @if $unit == 'px' {
+          $px: list.append($px, $value);
+
+          @if $val == 1 {
+            $rem: list.append($rem, $value);
+          }
+          @else {
+            $rem: list.append($rem, (math.div($val, $root) + rem));
+          }
+        }
+        @else if $unit == 'rem' {
+          $px: list.append($px, ($val * $root + px));
+          $rem: list.append($rem, $value);
+        }
+        @else {
+          $px: list.append($px, $value);
+          $rem: list.append($rem, $value);
+        }
+      }
+    }
+
+    @if $px == $rem {
+      #{$property}: $px;
+    }
+    @else {
+      #{$property}: $rem;
+    }
+  }
+}
+
+/**
+ * Mixin for generating a media query for screen widths of this breakpoint value and up.
+ *
+ * Courtesy of Framework SASS Source Files.
+ *
+ * @param $name
+ *   Name of the breakpoint.
+ * @param $breakpoints
+ *   Optional parameter for setting the breakpoints map.
+ */
+@mixin breakpoint-up(
+  $name,
+  $breakpoints: $grid-breakpoints
+) {
+  $min: breakpoint-min($name, $breakpoints);
+
+  @if $min {
+    @media (min-width: $min) {
+      @content;
+    }
+  }
+  @else {
+    @content;
+  }
+}
+
+/**
+ * Mixin for generating a media query for screen widths of this breakpoint value and down.
+ *
+ * Courtesy of Framework SASS Source Files.
+ *
+ * @param $name
+ *   Name of the breakpoint.
+ * @param $breakpoints
+ *   Optional parameter for setting the breakpoints map.
+ */
+@mixin breakpoint-down(
+  $name,
+  $breakpoints: $grid-breakpoints
+) {
+  $max: breakpoint-max($name, $breakpoints);
+
+  @if $max {
+    @media (max-width: $max) {
+      @content;
+    }
+  }
+  @else {
+    @content;
+  }
+}
