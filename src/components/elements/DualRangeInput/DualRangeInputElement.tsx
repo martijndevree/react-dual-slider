@@ -12,13 +12,12 @@ interface Props {
   step?: number;
 }
 
-function getTransformStyles(offset: number, limit: number) {
-  const calculatedPercentage = (offset / limit) * 100;
+function getLeftPercentageOffset(offset: number, min: number, max: number): number {
+  return ((offset - min) / (max - min)) * 100;
+}
 
-  return {
-    left: `${calculatedPercentage}%`,
-    transform: `translate(-${calculatedPercentage}%)`,
-  };
+function getRightPercentageOffset(offset: number, min: number, max: number): number {
+  return ((max - offset) / (max - min)) * 100;
 }
 
 /**
@@ -93,8 +92,8 @@ export default function DualRangeInputElement(
       <div
         className={styles.rangeVisualiser}
         style={{
-          left: `${(lowerValue / max) * 100}%`,
-          right: `${((max - upperValue) / max) * 100}%`,
+          left: `${getLeftPercentageOffset(lowerValue, min, max)}%`,
+          right: `${getRightPercentageOffset(upperValue, min, max)}%`,
         }}
       />
       <label
@@ -115,12 +114,18 @@ export default function DualRangeInputElement(
         />
         <div
           className={styles.labelTextWrapper}
-          style={getTransformStyles(lowerValue, max)}
+          style={{
+            left: `${getLeftPercentageOffset(lowerValue, min, max)}%`,
+            transform: `translate(-${getLeftPercentageOffset(lowerValue, min, max)}%)`,
+          }}
         >
           <div className={styles.arrowContainer}>
             <span
               className={styles.arrow}
-              style={getTransformStyles(lowerValue, max)}
+              style={{
+                left: `${getLeftPercentageOffset(lowerValue, min, max)}%`,
+                transform: `translate(-${getLeftPercentageOffset(lowerValue, min, max)}%)`,
+              }}
             />
           </div>
           <span className={styles.labelText}>
@@ -146,12 +151,18 @@ export default function DualRangeInputElement(
         />
         <div
           className={`${styles.labelTextWrapper} ${styles.labelTextWrapperMax}`}
-          style={getTransformStyles(upperValue, max)}
+          style={{
+            left: `${getLeftPercentageOffset(upperValue, min, max)}%`,
+            transform: `translate(-${getLeftPercentageOffset(upperValue, min, max)}%)`,
+          }}
         >
           <div className={styles.arrowContainer}>
             <span
               className={styles.arrow}
-              style={getTransformStyles(upperValue, max)}
+              style={{
+                left: `${getLeftPercentageOffset(upperValue, min, max)}%`,
+                transform: `translate(-${getLeftPercentageOffset(upperValue, min, max)}%)`,
+              }}
             />
           </div>
           <span className={styles.labelText}>
