@@ -4,6 +4,7 @@
 
 @use 'sass:list';
 @use 'sass:math';
+@use 'sass:map';
 @use "./variables.scss" as *;
 @use "./functions.scss" as *;
 
@@ -117,4 +118,26 @@
   @else {
     @content;
   }
+}
+
+@mixin slider-thumb($height) {
+  @include rem('height', $height);
+  appearance: none;
+  position: relative;
+  aspect-ratio: 1;
+  background: $button-accent;
+  border-radius: 50%;
+  cursor: pointer;
+  pointer-events: all;
+
+  &:hover {
+    background: $button-accent-hover;
+  }
+}
+
+@mixin slider-thumb-focus() {
+  @include rem('outline-width', 3px);
+  background: $color-white;
+  outline-style: solid;
+  outline-color: $button-accent;
 }

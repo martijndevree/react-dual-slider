@@ -24,6 +24,10 @@ module.exports = {
     ],
     // Suppress errors for missing 'import React' in files.
     'react/react-in-jsx-scope': 'off',
+    // Disable defaultProps requirement, as it is deprecated in React 18.3.
+    'react/require-default-props': 'off',
+    // Allow multiple JSX expressions per line.
+    'react/jsx-one-expression-per-line': 'off',
     // Enable import sorting rules.
     'simple-import-sort/exports': 'error',
     'simple-import-sort/imports': [

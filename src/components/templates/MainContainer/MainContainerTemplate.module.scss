@@ -2,11 +2,11 @@
   @include rem('max-width', $page-container-width);
   @include rem('padding', 32px);
   width: 100%;
-  background: $white;
+  background: $color-white;
 
   @include breakpoint-up('large') {
     @include rem('border-radius', 32px);
     @include rem('margin', 32px auto);
-    @include rem('box-shadow', 0 3px 7px rgba($black, 0.1));
+    @include rem('box-shadow', 0 3px 7px rgba($color-black, 0.1));
   }
 }

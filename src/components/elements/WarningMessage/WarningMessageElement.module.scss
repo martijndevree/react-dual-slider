@@ -1,0 +1,6 @@
+.warningMessage {
+  @include rem('padding', 12px 20px);
+  @include rem('border-radius', 10px);
+  width: fit-content;
+  background: $background-warning;
+}
