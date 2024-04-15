@@ -12,10 +12,37 @@ interface Props {
   step?: number;
 }
 
+/**
+ * Returns a number between 0 and 100 which is used for positioning of an element,
+ * based on its current represented value relative to its lowest possible value.
+ *
+ * What this means: on a slider from 0 to 10 - when an element's value is `3`, this
+ * function will return `30`.
+ *
+ * @param offset
+ *   The represented value of the element we want to know the offset for.
+ * @param min
+ *   The lowest possible value of the element.
+ * @param max
+ *   The highest possible value of the element.
+ */
 function getLeftPercentageOffset(offset: number, min: number, max: number): number {
   return ((offset - min) / (max - min)) * 100;
 }
 
+/**
+ * Returns a number between 0 and 100 which is used for positioning of an element,
+ * based on its current represented value relative to its highest possible value.
+ *
+ * This is essentially the same as `getLeftPercentageOffset()`, but for the other side.
+ *
+ * @param offset
+ *   The represented value of the element we want to know the offset for.
+ * @param min
+ *   The lowest possible value of the element.
+ * @param max
+ *   The highest possible value of the element.
+ */
 function getRightPercentageOffset(offset: number, min: number, max: number): number {
   return ((max - offset) / (max - min)) * 100;
 }

@@ -12,6 +12,7 @@
  * Mixin for converting px values to rem values.
  *
  * Courtesy of Framework SASS Source Files.
+ * See: https://github.com/smillart/Framework-SASS-Source-Files
  *
  * @param $property
  *   The property for which to convert pixel sizes.
@@ -72,6 +73,7 @@
  * Mixin for generating a media query for screen widths of this breakpoint value and up.
  *
  * Courtesy of Framework SASS Source Files.
+ * See: https://github.com/smillart/Framework-SASS-Source-Files
  *
  * @param $name
  *   Name of the breakpoint.
@@ -98,6 +100,7 @@
  * Mixin for generating a media query for screen widths of this breakpoint value and down.
  *
  * Courtesy of Framework SASS Source Files.
+ * See: https://github.com/smillart/Framework-SASS-Source-Files
  *
  * @param $name
  *   Name of the breakpoint.
@@ -118,26 +121,4 @@
   @else {
     @content;
   }
-}
-
-@mixin slider-thumb($height) {
-  @include rem('height', $height);
-  appearance: none;
-  position: relative;
-  aspect-ratio: 1;
-  background: $button-accent;
-  border-radius: 50%;
-  cursor: pointer;
-  pointer-events: all;
-
-  &:hover {
-    background: $button-accent-hover;
-  }
-}
-
-@mixin slider-thumb-focus() {
-  @include rem('outline-width', 3px);
-  background: $color-white;
-  outline-style: solid;
-  outline-color: $button-accent;
 }

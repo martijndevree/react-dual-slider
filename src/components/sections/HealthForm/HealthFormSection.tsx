@@ -4,6 +4,9 @@ import FormFieldTemplate from '@src/components/templates/FormField/FormFieldTemp
 import translate from '@src/utils/helpers/translate';
 import styles from './HealthFormSection.module.scss';
 
+/**
+ * Returns a form section with multiple questions.
+ */
 export default function HealthFormSection() {
   return (
     <section className={styles.healthForm}>

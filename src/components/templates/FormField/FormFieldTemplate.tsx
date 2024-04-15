@@ -6,6 +6,14 @@ interface Props {
   children: ReactNode;
 }
 
+/**
+ * Returns a reusable template for a field with an accompanying label.
+ *
+ * @param label
+ *   The label value.
+ * @param children
+ *   The field element.
+ */
 export default function FormFieldTemplate({ label, children }: Props) {
   return (
     <div className={styles.formField}>

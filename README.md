@@ -1,30 +1,24 @@
-# React + TypeScript + Vite
+# Dual slider demo
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Getting started
 
-Currently, two official plugins are available:
+This demo is built with React + TypeScript + Vite. If you are using NVM, run:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+```
+nvm use
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+If you are not using NVM, make sure you're on **Node 20**. Then, launch the app using:
+
+```
+npm run dev
+```
+
+## This demo features...
+
+- React 18 plus TypeScript.
+- Basic Sass setup with easy-to-use variables and mixins.
+- Extended eslint configuration using `airbnb-typescript` and `simple-import-sort` for a universal code style.
+- Atomic design principle within the `components` folder: elements, groups, sections and templates (smallest to largest).
+- Support for a multilingual setup based on a string translation system.
+- Some basic responsive styling via scoped Sass module files to make everything look a little nicer.

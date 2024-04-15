@@ -1,9 +1,31 @@
-// 1. The 'unset' needs to be the very first property, since
-// it overrides every other property that precedes it.
-
 @use 'sass:math';
 
-$thumb-height: 24px;
+// Local variables.
+$_thumb-height: 24px;
+
+// Local mixin to prevent duplicate style declarations.
+@mixin _slider-thumb() {
+  @include rem('height', $_thumb-height);
+  appearance: none;
+  position: relative;
+  aspect-ratio: 1;
+  background: $button-accent;
+  border-radius: 50%;
+  cursor: pointer;
+  pointer-events: all;
+
+  &:hover {
+    background: $button-accent-hover;
+  }
+}
+
+// Local mixin to prevent duplicate style declarations.
+@mixin _slider-thumb-focus() {
+  @include rem('outline-width', 3px);
+  background: $color-white;
+  outline-style: solid;
+  outline-color: $button-accent;
+}
 
 .inputWrapper {
   display: grid;
@@ -17,7 +39,7 @@ $thumb-height: 24px;
   }
 
   &::before {
-    @include rem('top', math.div($thumb-height, 2));
+    @include rem('top', math.div($_thumb-height, 2));
     @include rem('height', 4px);
     @include rem('border-radius', 999px);
     content: '';
@@ -29,7 +51,7 @@ $thumb-height: 24px;
 }
 
 .rangeVisualiser {
-  @include rem('top', math.div($thumb-height, 2));
+  @include rem('top', math.div($_thumb-height, 2));
   @include rem('height', 4px);
   position: absolute;
   background: $button-accent;
@@ -63,37 +85,41 @@ $thumb-height: 24px;
 }
 
 .input {
-  all: unset; // 1.
+  // The 'unset' needs to be the very first property, since
+  // it overrides every other property that precedes it.
+  all: unset;
 
-  @include rem('height', $thumb-height);
+  @include rem('height', $_thumb-height);
   position: relative;
   display: flex;
   width: 100%;
   pointer-events: none;
 
   &::-webkit-slider-thumb {
-    @include slider-thumb($thumb-height);
+    @include _slider-thumb;
   }
 
   &::-moz-range-thumb {
-    all: unset; // 1.
+    // The 'unset' needs to be the very first property, since
+    // it overrides every other property that precedes it.
+    all: unset;
 
-    @include slider-thumb($thumb-height);
+    @include _slider-thumb;
   }
 
   &:focus-visible {
     &::-webkit-slider-thumb {
-      @include slider-thumb-focus;
+      @include _slider-thumb-focus;
     }
 
     &::-moz-range-thumb {
-      @include slider-thumb-focus;
+      @include _slider-thumb-focus;
     }
   }
 }
 
 .arrowContainer {
-  @include rem('padding', 0 math.div($thumb-height, 4));
+  @include rem('padding', 0 math.div($_thumb-height, 4));
 }
 
 .arrow {

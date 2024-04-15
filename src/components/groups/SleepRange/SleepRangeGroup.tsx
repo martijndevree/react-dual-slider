@@ -1,16 +1,20 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import DualRangeInputElement from '@src/components/elements/DualRangeInput/DualRangeInputElement';
 import WarningMessageElement from '@src/components/elements/WarningMessage/WarningMessageElement';
 import FormFieldTemplate from '@src/components/templates/FormField/FormFieldTemplate';
 import translate from '@src/utils/helpers/translate';
 import styles from './SleepRangeGroup.module.scss';
 
+/**
+ * Returns a grouped form field capable of displaying a warning message based on the user's input.
+ */
 export default function SleepRangeGroup() {
   const [showMessage, setShowMessage] = useState<boolean>(false);
 
-  const inputChangeCallback = (min: number, max: number) => {
+  // This is called when values in `DualRangeInputElement` change.
+  const inputChangeCallback = useCallback((min: number, max: number) => {
     setShowMessage(() => min < 7 || max > 9);
-  };
+  }, []);
 
   return (
     <div className={styles.sleepRange}>

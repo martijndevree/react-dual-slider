@@ -1,11 +1,13 @@
 import { ReactNode } from 'react';
 import styles from './MainContainerTemplate.module.scss';
 
-interface Props {
-  children: ReactNode;
-}
-
-export default function MainContainerTemplate({ children }: Props) {
+/**
+ * Returns a reusable `main` container.
+ *
+ * @param children
+ *   Any React node.
+ */
+export default function MainContainerTemplate({ children }: { children: ReactNode }) {
   return (
     <main className={styles.mainContainer}>
       {children}
